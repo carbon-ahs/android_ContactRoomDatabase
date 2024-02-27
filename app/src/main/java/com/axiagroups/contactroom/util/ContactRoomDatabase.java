@@ -19,11 +19,9 @@ public abstract class ContactRoomDatabase extends RoomDatabase {
     public static final int NUMBER_OF_THREADS = 4;
     public static final String DB_NAME = "contact_database";
     public abstract ContactDao contactDao();
-    private static volatile ContactRoomDatabase INSTANCE;
     public static final ExecutorService databaseWriteExecutor
             = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
-
-
+    private static volatile ContactRoomDatabase INSTANCE;
 
     public static final RoomDatabase.Callback sRoomdatabaseCallback
             = new RoomDatabase.Callback() {
@@ -42,7 +40,6 @@ public abstract class ContactRoomDatabase extends RoomDatabase {
             });
         }
     };
-
     public static ContactRoomDatabase getDatabase(final Context context){
         if (INSTANCE == null) {
             synchronized (ContactRoomDatabase.class){
@@ -56,4 +53,8 @@ public abstract class ContactRoomDatabase extends RoomDatabase {
         }
         return INSTANCE;
     }
+
+
+
+
 }
